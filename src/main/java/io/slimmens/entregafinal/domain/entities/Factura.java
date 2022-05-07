@@ -5,7 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Objects;
 
-//import javax.persistence.Id;
+//nueva clase
+
 
 @Data
 @Entity
