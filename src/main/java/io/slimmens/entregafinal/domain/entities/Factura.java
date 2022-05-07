@@ -18,7 +18,7 @@ public class Factura {
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 
-	@Column(name = "nombre", nullable = false)
+	/*@Column(name = "nombre", nullable = false)
 	private String nombre;
 
 	@Column(name = "rubro", nullable = false)
@@ -31,5 +31,5 @@ public class Factura {
 	public Factura(String nombre, String rubro) {
 		this.nombre = Objects.requireNonNull(nombre);
 		this.rubro = Objects.requireNonNull(rubro);
-	}
+	}*/
 }
