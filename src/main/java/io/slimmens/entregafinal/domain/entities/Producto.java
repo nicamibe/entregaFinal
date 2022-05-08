@@ -7,15 +7,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "productos")
+@JsonIgnoreProperties({"hibernateLazyInitializer","referenceList"})
 public class Producto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 
@@ -25,8 +30,6 @@ public class Producto {
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
 
-	@Column(name = "nro_producto")
-	private int nroProducto;
 
 	@Column(name = "precio", nullable = false)
 	private double precio;

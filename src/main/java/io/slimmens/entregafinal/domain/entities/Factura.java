@@ -1,15 +1,22 @@
 package io.slimmens.entregafinal.domain.entities;
 
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+
+import java.util.Date;
 import java.util.Objects;
 
 //nueva clase
 
 
-@Data
+@Getter
+@Setter
 @Entity
+
 @Table(name = "facturas")
 public class Factura {
 
@@ -18,18 +25,23 @@ public class Factura {
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 
-	/*@Column(name = "nombre", nullable = false)
-	private String nombre;
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 
-	@Column(name = "rubro", nullable = false)
-	private String rubro;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha;
+
+
+
 
 	public Factura() {
 		// Constructor requerido por JPA.
 	}
 
-	public Factura(String nombre, String rubro) {
-		this.nombre = Objects.requireNonNull(nombre);
-		this.rubro = Objects.requireNonNull(rubro);
-	}*/
+	public Factura(int id, Cliente cliente, Date fecha) {
+		this.id = id;
+		this.cliente = cliente;
+		this.fecha = fecha;
+	}
 }

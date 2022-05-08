@@ -3,6 +3,7 @@ package io.slimmens.entregafinal.domain.entities;
 import java.util.Objects;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,7 @@ public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 
