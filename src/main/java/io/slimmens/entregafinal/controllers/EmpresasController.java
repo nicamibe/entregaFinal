@@ -5,7 +5,6 @@ import io.slimmens.entregafinal.controllers.dto.CollectionModel;
 import io.slimmens.entregafinal.controllers.dto.EmpresaModel;
 import io.slimmens.entregafinal.domain.entities.Empresa;
 import io.slimmens.entregafinal.services.EmpresasService;
-import io.slimmens.entregafinal.services.impl.EmpresasService;
 
 import java.util.Objects;
 import org.springframework.data.domain.Page;

@@ -25,6 +25,9 @@ public class Producto {
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
 
+	@Column(name = "nro_producto")
+	private int nroProducto;
+
 	@Column(name = "precio", nullable = false)
 	private double precio;
 

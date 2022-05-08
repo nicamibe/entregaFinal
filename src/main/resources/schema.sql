@@ -18,6 +18,7 @@ create table productos (
       id number not null auto_increment,
       nombre varchar(255) not null,
       descripcion varchar(255) not null,
+      nro_producto number not null,
       precio decimal not null,
       cantidad_disponible number not null,
       primary key (id)
