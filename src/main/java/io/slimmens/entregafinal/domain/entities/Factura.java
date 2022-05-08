@@ -2,13 +2,14 @@ package io.slimmens.entregafinal.domain.entities;
 
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 
 import javax.persistence.*;
 
 import java.util.Date;
-import java.util.Objects;
+
+import java.util.Set;
 
 //nueva clase
 
@@ -32,7 +33,14 @@ public class Factura {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 
+   @OneToMany(mappedBy = "factura", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+   private Set<DetalleFactura> detalleFactura;
 
+   /* public DetalleFactura agregarDetalle(DetalleFactura detalleFactura) {
+    	getDetalleFactura().add(detalleFactura);
+    	detalleFactura.setFactura(this);
+    	return detalleFactura;
+	}*/
 
 
 	public Factura() {

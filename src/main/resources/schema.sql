@@ -23,3 +23,6 @@ create table productos (
       cantidad_disponible number not null,
       primary key (id)
 );
+
+
+
