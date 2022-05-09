@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import java.util.Set;
@@ -19,7 +20,9 @@ import java.util.Set;
 @Entity
 
 @Table(name = "facturas")
-public class Factura {
+public class Factura implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +39,11 @@ public class Factura {
    @OneToMany(mappedBy = "factura", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
    private Set<DetalleFactura> detalleFactura;
 
-   /* public DetalleFactura agregarDetalle(DetalleFactura detalleFactura) {
+   public DetalleFactura agregarDetalle(DetalleFactura detalleFactura) {
     	getDetalleFactura().add(detalleFactura);
     	detalleFactura.setFactura(this);
     	return detalleFactura;
-	}*/
+	}
 
 
 	public Factura() {

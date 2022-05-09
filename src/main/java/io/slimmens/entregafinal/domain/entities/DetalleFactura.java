@@ -19,6 +19,8 @@ public class DetalleFactura {
     @Column(name = "nombre_producto")
     private String nombreProducto;
 
+    //---------------VER EL TEMA DEL PRECIO-------------
+
     @ManyToOne
     @JoinColumn(name = "factura_id")
     @JsonBackReference
