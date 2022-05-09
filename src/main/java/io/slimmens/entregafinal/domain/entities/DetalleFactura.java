@@ -19,7 +19,8 @@ public class DetalleFactura {
     @Column(name = "nombre_producto")
     private String nombreProducto;
 
-    //---------------VER EL TEMA DEL PRECIO-------------
+    @Column(name = "precio_producto")
+    private double precioProducto;
 
     @ManyToOne
     @JoinColumn(name = "factura_id")
@@ -27,10 +28,12 @@ public class DetalleFactura {
     private Factura factura;
 
 
-
-
-
-
+    public DetalleFactura(int id, String nombreProducto, double precioProducto, Factura factura) {
+        this.id = id;
+        this.nombreProducto = nombreProducto;
+        this.precioProducto = precioProducto;
+        this.factura = factura;
+    }
 
     public DetalleFactura() {
         // Constructor requerido por JPA.
