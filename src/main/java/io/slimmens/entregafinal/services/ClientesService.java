@@ -8,6 +8,8 @@ public interface ClientesService {
 
     Optional<Cliente> get(Integer id);
 
+    Cliente obtenerClientePorId(Cliente cliente);
+
     Page<Cliente> list(Integer pageNumber, Integer pageSize);
 
     Cliente create(String nombre, String apellido, String direccion, Integer dni);

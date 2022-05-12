@@ -18,11 +18,7 @@ public class DetalleFacturaMapper {
 
     public DetalleFacturaModel mapToModel(DetalleFactura domain) {
         DetalleFacturaModel model = new DetalleFacturaModel();
-        model.setId(domain.getId());
-        model.setNombreProducto(domain.getNombreProducto());
-        model.setPrecioProducto(domain.getPrecioProducto());
-        model.setFactura(domain.getFactura());
-
+        //model.setProducto(domain.getPrecioProducto());
 
         return model;
     }

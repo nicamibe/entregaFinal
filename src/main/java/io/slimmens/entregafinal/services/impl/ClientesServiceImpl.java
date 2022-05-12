@@ -6,13 +6,20 @@ import io.slimmens.entregafinal.services.ClientesService;
 import io.slimmens.entregafinal.utils.ValidationUtils;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Slf4j
+
 public class ClientesServiceImpl implements ClientesService {
+
+@Autowired
+ClientesRepository clientesRepository;
 
 	private static final int DEFAULT_PAGE_NUMBER = 0;
 	private static final int DEFAULT_PAGE_SIZE = 10;
@@ -29,6 +36,19 @@ public class ClientesServiceImpl implements ClientesService {
 		ValidationUtils.isNotNull(id, "El id no puede ser vacio.");
 
 		return repository.findById(id);
+	}
+
+	@Transactional
+	public Cliente obtenerClientePorId(Cliente cliente){
+		Optional<Cliente> buscarCliente = clientesRepository.findById(cliente.getId());
+		if(buscarCliente.isPresent()){
+			log.info("Cliente Encontrado");
+			return buscarCliente.get();
+		}
+else {
+			log.info("guardado de socio nuevo");
+			return clientesRepository.save(cliente);
+		}
 	}
 
 	@Transactional(readOnly = true)

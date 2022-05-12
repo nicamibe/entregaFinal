@@ -24,8 +24,8 @@ public class Cliente {
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
 
-	@Column(name = "dni", nullable = false)
-	private int dni;
+	@Column(name = "dni")//, nullable = false)
+	private Integer dni;
 
 	@Column(name = "direccion", nullable = false)
 	private String direccion;

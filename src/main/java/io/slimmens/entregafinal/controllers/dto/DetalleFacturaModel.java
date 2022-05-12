@@ -1,6 +1,7 @@
 package io.slimmens.entregafinal.controllers.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.slimmens.entregafinal.domain.entities.Factura;
+import io.slimmens.entregafinal.domain.entities.Producto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,15 +11,13 @@ import lombok.Setter;
 
 public class DetalleFacturaModel {
 
-    @JsonProperty("id")
-    private int id;
+  private Producto producto;
 
-    @JsonProperty("nombre_producto")
-    private String nombreProducto;
+    public DetalleFacturaModel (){
 
-    @JsonProperty("precio_producto")
-    private double precioProducto;
+    }
 
-    @JsonProperty("factura")
-    private Factura factura;
+    public DetalleFacturaModel(Producto producto) {
+        this.producto = producto;
+    }
 }

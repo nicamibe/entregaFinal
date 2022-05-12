@@ -25,4 +25,6 @@ public interface ProductosService {
 
     @Transactional
     Optional<Producto> updateDisponibilidad(Integer id, Integer variacion);
+
+    Producto getProductoByNombre(String nombre);
 }

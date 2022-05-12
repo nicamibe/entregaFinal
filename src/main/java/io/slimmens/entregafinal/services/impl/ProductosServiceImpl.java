@@ -1,18 +1,24 @@
 package io.slimmens.entregafinal.services.impl;
 
+import io.slimmens.entregafinal.domain.entities.Cliente;
 import io.slimmens.entregafinal.domain.entities.Producto;
+import io.slimmens.entregafinal.domain.repositories.ClientesRepository;
 import io.slimmens.entregafinal.domain.repositories.ProductosRepository;
 import io.slimmens.entregafinal.utils.ValidationUtils;
 import java.util.Objects;
 import java.util.Optional;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Slf4j
 @Service
 public class ProductosServiceImpl implements io.slimmens.entregafinal.services.ProductosService {
-	
+	@Autowired
+	ProductosRepository productosRepository;
 	private static final int DEFAULT_PAGE_NUMBER = 0;
 	private static final int DEFAULT_PAGE_SIZE = 10;
 
@@ -100,5 +106,15 @@ public class ProductosServiceImpl implements io.slimmens.entregafinal.services.P
 				})
 				.map(repository::save);
 	}
-
+    public Producto getProductoByNombre(String nombre){
+		Optional<Producto> buscarProducto = productosRepository.findByNombre(nombre);
+		if(buscarProducto.isPresent()){
+			log.info("Cliente Encontrado");
+			return buscarProducto.get();
+		}
+		else {
+			log.info("guardado de socio nuevo");
+			return productosRepository.save(nombre);
+		}
+	}
 }
