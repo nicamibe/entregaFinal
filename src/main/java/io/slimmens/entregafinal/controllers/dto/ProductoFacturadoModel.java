@@ -1,13 +1,19 @@
 package io.slimmens.entregafinal.controllers.dto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 
 @Data
 public class ProductoFacturadoModel {
-  int cantidad;
-  int id;
-  String nombre;
-  double precio;
+
+  @JsonProperty("producto")
+  private ProductoModel producto;
+
+  @JsonProperty("cantidad")
+  private int cantidad;
+
+  @JsonProperty("precio")
+  private double precio;
 
 
 }

@@ -15,7 +15,5 @@ public interface ClientesService {
     Optional<Cliente> update(Integer id, String nombre, String apellido, String direccion, Integer dni);
 
     Optional<Cliente> delete(Integer id);
-
-    Cliente crearSiNoExiste(Cliente cliente);
 }
 

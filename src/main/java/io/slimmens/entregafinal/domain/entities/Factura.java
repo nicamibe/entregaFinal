@@ -1,24 +1,27 @@
 package io.slimmens.entregafinal.domain.entities;
 
-
-import lombok.Getter;
-
-import lombok.Setter;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Date;
-
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-//nueva clase
-
-
-@Getter
-@Setter
+@Data
 @Entity
-
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "facturas")
 public class Factura implements Serializable {
 
@@ -33,26 +36,26 @@ public class Factura implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@ManyToOne
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
+   	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "factura_id")
+   	private Set<ProductoFacturado> productos;
+
+	@CreatedDate
+	@Column(name = "fecha")
 	private Date fecha;
 
-   @OneToMany(mappedBy = "factura", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-   private Set<DetalleFactura> detalleFactura;
-
-   public DetalleFactura agregarDetalle(DetalleFactura detalleFactura) {
-    	getDetalleFactura().add(detalleFactura);
-    	detalleFactura.setFactura(this);
-    	return detalleFactura;
-	}
-
-
-	public Factura() {
+   public Factura() {
 		// Constructor requerido por JPA.
 	}
 
-	public Factura(int id, Cliente cliente, Date fecha) {
-		this.id = id;
+	public Factura(Cliente cliente, Empresa empresa, Set<ProductoFacturado> productos) {
 		this.cliente = cliente;
-		this.fecha = fecha;
+		this.empresa = empresa;
+		this.productos = productos;
+
 	}
 }

@@ -106,15 +106,4 @@ public class ProductosServiceImpl implements io.slimmens.entregafinal.services.P
 				})
 				.map(repository::save);
 	}
-    public Producto getProductoByNombre(String nombre){
-		Optional<Producto> buscarProducto = productosRepository.findByNombre(nombre);
-		if(buscarProducto.isPresent()){
-			log.info("Cliente Encontrado");
-			return buscarProducto.get();
-		}
-		else {
-			log.info("guardado de socio nuevo");
-			return productosRepository.save(nombre);
-		}
-	}
 }

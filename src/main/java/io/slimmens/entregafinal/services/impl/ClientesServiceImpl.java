@@ -18,9 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class ClientesServiceImpl implements ClientesService {
 
-@Autowired
-ClientesRepository clientesRepository;
-
 	private static final int DEFAULT_PAGE_NUMBER = 0;
 	private static final int DEFAULT_PAGE_SIZE = 10;
 
@@ -37,8 +34,6 @@ ClientesRepository clientesRepository;
 
 		return repository.findById(id);
 	}
-
-
 
 	@Transactional(readOnly = true)
 	public Page<Cliente> list(Integer pageNumber, Integer pageSize) {
@@ -87,14 +82,4 @@ ClientesRepository clientesRepository;
 				});
 	}
 
-	@Override
-	public Cliente crearSiNoExiste(Cliente cliente) {
-		return get(cliente.getId())
-				.orElseGet(() -> create(
-						cliente.getNombre(),
-						cliente.getApellido(),
-						cliente.getDireccion(),
-						cliente.getDni()
-				));
-	}
 }
