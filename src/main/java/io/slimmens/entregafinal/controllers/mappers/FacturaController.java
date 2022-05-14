@@ -1,13 +1,8 @@
 package io.slimmens.entregafinal.controllers.mappers;
 
 
-import io.slimmens.entregafinal.controllers.dto.FacturaModel;
-import io.slimmens.entregafinal.domain.entities.Factura;
-import io.slimmens.entregafinal.services.impl.FacturaService;
+import io.slimmens.entregafinal.services.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

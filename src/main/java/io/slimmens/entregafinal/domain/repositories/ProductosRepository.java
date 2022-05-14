@@ -6,5 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ProductosRepository extends PagingAndSortingRepository<Producto, Integer> {
 
-    Producto findByNombre(String nombre);
+
 }

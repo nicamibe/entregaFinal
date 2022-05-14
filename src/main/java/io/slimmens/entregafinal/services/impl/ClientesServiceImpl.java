@@ -38,18 +38,7 @@ ClientesRepository clientesRepository;
 		return repository.findById(id);
 	}
 
-	@Transactional
-	public Cliente obtenerClientePorId(Cliente cliente){
-		Optional<Cliente> buscarCliente = clientesRepository.findById(cliente.getId());
-		if(buscarCliente.isPresent()){
-			log.info("Cliente Encontrado");
-			return buscarCliente.get();
-		}
-else {
-			log.info("guardado de socio nuevo");
-			return clientesRepository.save(cliente);
-		}
-	}
+
 
 	@Transactional(readOnly = true)
 	public Page<Cliente> list(Integer pageNumber, Integer pageSize) {
@@ -96,5 +85,16 @@ else {
 					repository.delete(cliente);
 					return cliente;
 				});
+	}
+
+	@Override
+	public Cliente crearSiNoExiste(Cliente cliente) {
+		return get(cliente.getId())
+				.orElseGet(() -> create(
+						cliente.getNombre(),
+						cliente.getApellido(),
+						cliente.getDireccion(),
+						cliente.getDni()
+				));
 	}
 }
