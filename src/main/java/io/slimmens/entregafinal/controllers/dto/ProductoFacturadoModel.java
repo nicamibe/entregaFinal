@@ -15,6 +15,9 @@ public class ProductoFacturadoModel {
   @JsonProperty("precio")
   private double precio;
 
+  @JsonProperty("total_parcial")
+  private double totalParcial;
+
 
 }
 

@@ -20,6 +20,8 @@ public class ProductoFacturadosMapper {
 		model.setProducto(productosMapper.mapToModel(domain.getProducto()));
 		model.setCantidad(domain.getCantidad());
 		model.setPrecio(domain.getPrecio());
+		model.setTotalParcial(domain.getPrecio() * domain.getCantidad());
+
 
 		return model;
 	}

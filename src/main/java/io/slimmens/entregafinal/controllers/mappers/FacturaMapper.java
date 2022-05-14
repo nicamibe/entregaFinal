@@ -1,6 +1,7 @@
 package io.slimmens.entregafinal.controllers.mappers;
 
 import io.slimmens.entregafinal.controllers.dto.FacturaModel;
+import io.slimmens.entregafinal.controllers.dto.ProductoFacturadoModel;
 import io.slimmens.entregafinal.domain.entities.Factura;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,13 @@ public class FacturaMapper {
         model.setEmpresa(empresasMapper.mapToModel(domain.getEmpresa()));
         model.setProductos(productoFacturadosMapper.mapToModel(domain.getProductos()));
         model.setFecha(domain.getFecha());
+        model.setId(domain.getId());
+
+        double total = 0;
+        for (ProductoFacturadoModel producto : model.getProductos()) {
+            total += producto.getTotalParcial();
+        }
+        model.setTotal(total);
 
         return model;
     }
