@@ -1,9 +1,12 @@
 package io.slimmens.entregafinal.controllers;
 
+import io.slimmens.entregafinal.controllers.dto.FacturaModel;
 import io.slimmens.entregafinal.controllers.mappers.ClientesMapper;
 import io.slimmens.entregafinal.controllers.dto.CollectionModel;
 import io.slimmens.entregafinal.controllers.dto.ClienteModel;
+import io.slimmens.entregafinal.controllers.mappers.FacturaMapper;
 import io.slimmens.entregafinal.domain.entities.Cliente;
+import io.slimmens.entregafinal.services.FacturaService;
 import io.slimmens.entregafinal.services.impl.ClientesServiceImpl;
 import java.util.Objects;
 import org.springframework.data.domain.Page;
@@ -25,11 +28,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientesController {
 	
 	private final ClientesServiceImpl service;
+	private final FacturaService facturaService;
 	private final ClientesMapper mapper;
+	private final FacturaMapper facturaMapper;
 	
-	public ClientesController(ClientesServiceImpl service, ClientesMapper mapper) {
+	public ClientesController(ClientesServiceImpl service, FacturaService facturaService,
+							  ClientesMapper mapper, FacturaMapper facturaMapper) {
 		this.service = Objects.requireNonNull(service);
+		this.facturaService = Objects.requireNonNull(facturaService);
 		this.mapper = Objects.requireNonNull(mapper);
+		this.facturaMapper = Objects.requireNonNull(facturaMapper);
 	}
 	
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -82,6 +90,16 @@ public class ClientesController {
 	public ResponseEntity<ClienteModel> delete(@PathVariable("id") Integer id) {
 		return service.delete(id)
 				.map(mapper::mapToModel)
+				.map(ResponseEntity::ok)
+				.orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	@GetMapping(path = "/{id}/facturas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<CollectionModel<FacturaModel>> getFacturas(@PathVariable("id") Integer id) {
+		return service.get(id)
+				.map(facturaService::getByClient)
+				.map(facturaMapper::mapToModel)
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}

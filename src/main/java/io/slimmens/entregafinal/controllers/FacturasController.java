@@ -50,6 +50,7 @@ public class FacturasController {
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
+
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<FacturaModel> create(@RequestBody FacturaModel request) {
@@ -76,7 +77,7 @@ public class FacturasController {
 					ProductoFacturadoModel::getCantidad
 			));
 
-		Factura factura = facturaService.create(cliente, empresa, cantidadesPorProducto);
+		Factura factura = facturaService.create(cliente, empresa, cantidadesPorProducto, request.getTipo());
 
 		return ResponseEntity.ok(mapper.mapToModel(factura));
 	}

@@ -48,14 +48,17 @@ public class Factura implements Serializable {
 	@Column(name = "fecha")
 	private Date fecha;
 
+	@Column(name = "tipo")
+	private String tipo;
+
    public Factura() {
 		// Constructor requerido por JPA.
 	}
 
-	public Factura(Cliente cliente, Empresa empresa, Set<ProductoFacturado> productos) {
+	public Factura(Cliente cliente, Empresa empresa, Set<ProductoFacturado> productos, String tipo) {
 		this.cliente = cliente;
 		this.empresa = empresa;
 		this.productos = productos;
-
+		this.tipo = tipo;
 	}
 }

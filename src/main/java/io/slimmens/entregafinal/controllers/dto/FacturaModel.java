@@ -11,26 +11,23 @@ public class FacturaModel {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("cliente")
-    private ClienteModel cliente;
-
-    @JsonProperty("empresa")
-    private EmpresaModel empresa;
-
-    @JsonProperty("productos")
-    private Set<ProductoFacturadoModel> productos;
-
     @JsonProperty("fecha")
     private Date fecha;
 
     @JsonProperty("tipo")
-    private Tipo tipo;
+    private String tipo;
+
+    @JsonProperty("empresa")
+    private EmpresaModel empresa;
 
     @JsonProperty("total")
     private double total;
 
-    enum Tipo {
-        A, B, C
-    }
+    @JsonProperty("cliente")
+    private ClienteModel cliente;
+
+    @JsonProperty("productos")
+    private Set<ProductoFacturadoModel> productos;
+
 
 }

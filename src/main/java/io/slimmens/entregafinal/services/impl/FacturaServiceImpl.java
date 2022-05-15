@@ -10,13 +10,12 @@ import io.slimmens.entregafinal.services.ClientesService;
 import io.slimmens.entregafinal.services.FacturaService;
 import io.slimmens.entregafinal.services.ProductosService;
 import io.slimmens.entregafinal.utils.ValidationUtils;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,8 +41,18 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
+    public List<Factura> getByClient(Cliente cliente) {
+        ValidationUtils.isNotNull(cliente, "El cliente no puede ser vacio.");
+
+        return repository.findAllByCliente(cliente);
+    }
+
+
+    @Override
     @Transactional
-    public Factura create(Cliente cliente, Empresa empresa, Map<Integer, Integer> cantidadesPorProducto) {
+    public Factura create(Cliente cliente, Empresa empresa, Map<Integer, Integer> cantidadesPorProducto, String tipo) {
+        ValidationUtils.isNotBlank(tipo, "Ël tipo de la factura no puede ser vacio.");
+
         Set<ProductoFacturado> productos = new HashSet<>();
         for (Integer idProducto : cantidadesPorProducto.keySet()) {
             int cantidad = ValidationUtils.isGreaterThan(
@@ -61,7 +70,8 @@ public class FacturaServiceImpl implements FacturaService {
         return repository.save(new Factura(
                 cliente,
                 empresa,
-                productos
+                productos,
+                tipo
         ));
     }
 }
